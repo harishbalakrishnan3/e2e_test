@@ -1,5 +1,5 @@
 PyHamcrest>=2.1.0
-PyYaml>=6.0.2
+PyYaml~=6.0.1
 behave>=1.2.6
 docker>=7.1.0
 mockseries>=0.3.1
@@ -12,8 +12,9 @@ opentelemetry-semantic-conventions>=0.48b0
 opentelemetry-semantic-conventions-ai>=0.4.1
 pillow>=10.4.0
 python-dotenv>=1.0.1
-requests>=2.32.3
+requests~=2.31.0
 regex>=2024.9.11
 Flask>=3.0.3
 python-dateutil>=2.9.0.post0
 pyjwt>=2.9.0
+yaml~=0.2.5
