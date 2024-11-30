@@ -6,7 +6,8 @@ from hamcrest import assert_that
 from features.steps import utils
 from features.steps.cdo_apis import delete_insights, verify_insight_type_and_state
 from features.steps.metrics_generator_apis import update_timeseries, create_metric, get_all_metrics, delete_timeseries
-from features.steps.utils import execute_docker_compose_command
+from features.steps.cdo_apis import get
+# from features.steps.utils import execute_docker_compose_command
 
 
 @step('the insights are cleared')
@@ -41,8 +42,8 @@ def step_impl(context, duration, insight_type, insight_state):
 
 @given('the mock generator is started')
 def step_impl(context):
-    command = ["docker compose", "up", "-d"]
-    execute_docker_compose_command(command)
+    get('http://localhost:8123/metrics')
+
     # Give some time for the mock generator to start
     time.sleep(2)
 
@@ -131,8 +132,9 @@ def step_impl(context, duration, unit):
 
 @step('stop the mock generator')
 def step_impl(context):
-    command = ["docker compose", "down"]
-    execute_docker_compose_command(command)
+    # command = ["docker compose", "down"]
+    # execute_docker_compose_command(command)
+    pass
 
 
 @then(
