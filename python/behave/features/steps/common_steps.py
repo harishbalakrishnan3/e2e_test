@@ -42,10 +42,7 @@ def step_impl(context, duration, insight_type, insight_state):
 
 @given('the mock generator is started')
 def step_impl(context):
-    get('http://localhost:8123/metrics')
-
-    # Give some time for the mock generator to start
-    time.sleep(2)
+    pass
 
 
 @step('the mock generator should be up and running')
