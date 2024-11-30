@@ -1,0 +1,2 @@
+promtool filter=lfs diff=lfs merge=lfs -text
+prometheus filter=lfs diff=lfs merge=lfs -text
