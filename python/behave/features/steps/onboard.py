@@ -8,6 +8,7 @@ from features.steps.cdo_apis import post_onboard_action, get_onboard_status
 
 @step('perform a tenant {action}')
 def step_impl(context, action):
+    time.sleep(10)
     if action.upper() == "ONBOARD":
         post_onboard_action("ONBOARD")
     else:
