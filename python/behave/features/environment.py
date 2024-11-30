@@ -2,7 +2,6 @@ import os
 import yaml
 import jwt
 
-from dotenv import load_dotenv
 import docker
 
 from features.steps.cdo_apis import get, post
@@ -12,12 +11,14 @@ timeseries = {}
 
 
 def before_all(context):
+    print("Before all 1")
     # Creating an empty timeseries dictionary - this will be populated in the due course of test execution
     context.timeseries = timeseries
 
+    print("Before all 2")
     # Loading the CDO token from the .env file and adding it to the environment variables
-    load_dotenv()
     cdo_token = os.getenv('CDO_TOKEN')
+    print("Before all 3: ", cdo_token)
     os.environ['CDO_TOKEN'] = cdo_token
 
     # Adding the tenant_id to the context
@@ -25,19 +26,16 @@ def before_all(context):
         decoded = jwt.decode(cdo_token, options={"verify_signature": False})
         context.tenant_id = decoded['parentId']
 
+    print("Before all 4: ", cdo_token)
     # Updating the remote write config in the prometheus.yml file
     update_remote_write_config(context)
+    print("Before all 5: ", cdo_token)
 
 
 def before_scenario(context, scenario):
-    client = docker.from_env()
     try:
-        container = client.containers.get('prometheus')
-        if container.status == 'running':
-            update_remote_write_config(context)
-            post(Url.PROMETHEUS_RELOAD_URL)
-        else:
-            print(f"Prometheus is not running. Status: {container.status}")
+        update_remote_write_config(context)
+        post(Url.PROMETHEUS_RELOAD_URL)
     except:
         print(f"Prometheus not found. Not updating remote write config.")
 
