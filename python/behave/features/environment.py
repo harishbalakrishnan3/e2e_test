@@ -29,7 +29,7 @@ def before_all(context):
     print("Before all 4: ", cdo_token)
     # Updating the remote write config in the prometheus.yml file
     update_remote_write_config(context)
-    print("Before all 5: ", cdo_token)
+    print("Before all 5")
 
 
 def before_scenario(context, scenario):

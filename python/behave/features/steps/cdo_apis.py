@@ -39,6 +39,7 @@ def get(endpoint):
     print(f"Sending GET request to {endpoint}")
     response = requests.get(endpoint, headers={"Content-Type": "application/json",
                                                "Authorization": "Bearer " + os.getenv('CDO_TOKEN')})
+    print("Response Status code: ", response.status_code)
     response_payload = response.json()
     print("Response: ", response_payload)
     assert response.status_code == 200, f"GET request to {endpoint} failed with status code {response.status_code}"
